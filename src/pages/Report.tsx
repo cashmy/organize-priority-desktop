@@ -56,12 +56,30 @@ const Report: React.FC = () => {
     [],
   );
 
+  const returnToAppPath = useMemo(() => {
+    const params = new URLSearchParams({
+      view,
+      search,
+      done: showCompleted ? "1" : "0",
+    });
+
+    return `/?${params.toString()}`;
+  }, [view, search, showCompleted]);
+
+  const handleBackToApp = () => {
+    window.close();
+
+    window.setTimeout(() => {
+      navigate(returnToAppPath, { replace: true });
+    }, 150);
+  };
+
   return (
     <div className="report-page min-h-screen bg-slate-100 text-slate-900">
       <div className="report-shell mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="report-actions mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <button
-            onClick={() => navigate("/")}
+            onClick={handleBackToApp}
             className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
           >
             <ArrowLeft className="h-4 w-4" />

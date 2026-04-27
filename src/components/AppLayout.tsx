@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FileText } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import { useTodos } from "@/hooks/useTodos";
 import { useAuth } from "@/contexts/AuthContext";
 import { Task, DOW, PRIORITY_RANK } from "@/lib/todoTypes";
@@ -27,6 +28,7 @@ import {
 } from "lucide-react";
 
 const AppLayout: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const {
     categories,
     tasks,
@@ -49,9 +51,13 @@ const AppLayout: React.FC = () => {
   } = useTodos();
   const { user, signOut } = useAuth();
 
-  const [view, setView] = useState<string>("all"); // all | today | dow:X | category id
-  const [search, setSearch] = useState("");
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [view, setView] = useState<string>(
+    () => searchParams.get("view") ?? "all",
+  ); // all | today | dow:X | category id
+  const [search, setSearch] = useState(() => searchParams.get("search") ?? "");
+  const [showCompleted, setShowCompleted] = useState(
+    () => searchParams.get("done") === "1",
+  );
   const [editing, setEditing] = useState<Task | null>(null);
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
@@ -136,11 +142,7 @@ const AppLayout: React.FC = () => {
       done: showCompleted ? "1" : "0",
     });
 
-    window.open(
-      `/report?${params.toString()}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+    window.open(`/report?${params.toString()}`, "task-report-preview")?.focus();
   };
 
   const handleTaskDragStart = (taskId: string, categoryId: string) => {

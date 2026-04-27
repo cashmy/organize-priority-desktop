@@ -1,0 +1,13 @@
+services:
+  organize-priority-desktop:
+    container_name: organize-priority-desktop
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    image: organize-priority-desktop:local
+    ports:
+      - "8085:80"
+    restart: unless-stopped

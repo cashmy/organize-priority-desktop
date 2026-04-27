@@ -9,7 +9,9 @@ The application exposes a report view from the top bar. The report opens as a de
 ## How It Is Requested
 
 - A `Report` action appears in the top-right action cluster of the main app layout.
-- The action opens the report in a separate page using the current task-view context.
+- The action opens the report in a dedicated preview tab using the current task-view context.
+- Repeated report requests reuse the same preview tab instead of creating a new tab each time.
+- `Back To App` closes the preview tab when possible; if the report was opened directly, it returns to the app with the same report context.
 
 ## What The Report Uses
 
