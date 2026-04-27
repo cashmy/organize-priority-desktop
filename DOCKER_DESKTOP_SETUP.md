@@ -25,6 +25,23 @@ docker compose up -d --build
 
 The app will be available at `http://localhost:8085`.
 
+## One-Click Windows Launch
+
+For normal desktop use on Windows, you can double-click `launch-desktop-app.cmd`.
+
+That wrapper will:
+
+- start Docker Desktop if it is not already running
+- run `docker compose up -d`
+- wait for the app health check on port `8085`
+- open the app in the default browser
+
+If you need to rebuild the image after changing source or environment values, run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\launch-desktop-app.ps1 -Build
+```
+
 ## Stop The Container
 
 ```bash

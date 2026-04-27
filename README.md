@@ -2,6 +2,8 @@
 
 This project was scaffolded from a Vite React TypeScript template and includes application-specific storage and backend integration.
 
+For Windows desktop use, the app can now be launched through Docker Desktop with `launch-desktop-app.cmd`.
+
 ## Project Documentation
 
 - [Data Persistence Overview](./DATA_PERSISTENCE.md)
