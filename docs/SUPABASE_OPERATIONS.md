@@ -190,7 +190,7 @@ If this project is going to be maintained or deployed seriously, the first pract
 - `src/lib/supabase.ts`
 - `src/hooks/useTodos.ts`
 - `src/contexts/AuthContext.tsx`
-- `DATA_PERSISTENCE.md`
+- `docs/DATA_PERSISTENCE.md`
 
 ## Bottom Line
 
